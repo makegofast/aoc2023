@@ -61,13 +61,9 @@ def solve(filename, part2=False):
     data, number_map, symbol_map = read_file(filename)
     part_numbers = []
 
-    print(number_map)
-    print(symbol_map)
-
     for row, locations in symbol_map.items():
         for location in locations:
             numbers = find_numbers_around(row, location['pos'], number_map, data)
-            print(numbers)
 
             if part2:
                 if location['symbol'] == "*" and len(numbers)==2:
