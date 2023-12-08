@@ -1,7 +1,15 @@
-def read_file(filename):
+def read_file(filename, part2=False):
     data = open(filename).read().splitlines()
 
-    seeds = [int(v) for v in data.pop(0).split(': ')[1].split()]
+    seed_data = data.pop(0).split(': ')[1].split()
+
+    if part2:
+        seeds = []
+        while len(seed_data):
+            a, b = seed_data.pop(0), seed_data.pop(0)
+            seeds.append([int(a), int(a)+int(b)])
+    else:
+        seeds = [[int(v), int(v)] for v in seed_data]
     
     maps = {}
 
@@ -26,7 +34,7 @@ def read_file(filename):
     return seeds, maps
 
 def recursively_map(val, cat, maps):
-    print(f"trying to map {val} {cat}")
+    #print(f"trying to map {val} {cat}")
     if cat in maps:
         dst_type = maps[cat]['dst']
 
@@ -41,16 +49,28 @@ def recursively_map(val, cat, maps):
 
 def solve(filename, part2=False):
     values = []
-    seeds, maps = read_file(filename)
+    seeds, maps = read_file(filename, part2)
 
-    for seed in seeds:
-        values.append(recursively_map(seed, 'seed', maps))
+    lowest = None
 
-    return min(v[0] for v in values)
+    i = 0
+    j = len(seeds)
+    for seed_start, seed_end in seeds:
+        i += 1
+
+        for seed in range(seed_start, seed_end+1):
+            pct = (seed/seed_end)*100
+            if seed%50000 == 0:
+                print(f"testing {seed} of {seed_end} ({pct}% {i} of {j})")
+            result = recursively_map(seed, 'seed', maps)
+            if not lowest or result <= lowest:
+                lowest = result
+
+    return lowest
 
 if __name__ == "__main__":
     print("Part 1 Test: ", solve('test_data.txt'))
     print("Part 1: ", solve('data.txt'))
 
-    #print("Part 2 Test:", solve('test_data.txt', part2=True))
-    #print("Part 2:", solve('data.txt', part2=True))
+    print("Part 2 Test:", solve('test_data.txt', part2=True))
+    print("Part 2:", solve('data.txt', part2=True))
