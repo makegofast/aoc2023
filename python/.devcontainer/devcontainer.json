@@ -1,38 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
 {
-    "id": "python",
-    "version": "3.0.0",
-    "name": "Python 3",
-    "description": "Develop Python 3 applications.",
-    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/python",
-    "publisher": "Dev Container Spec Maintainers",
-    "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
-    "options": {
-        "imageVariant": {
-            "type": "string",
-            "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
-            "proposals": [
-				"3-bookworm",
-                "3.12-bookworm",
-                "3.11-bookworm",
-                "3.10-bookworm",
-                "3.9-bookworm",
-                "3.8-bookworm",
-                "3-bullseye",
-                "3.12-bullseye",
-                "3.11-bullseye",
-                "3.10-bullseye",
-                "3.9-bullseye",
-                "3.8-bullseye",
-                "3-buster",
-                "3.11-buster",
-                "3.10-buster",
-                "3.9-buster",
-                "3.8-buster"
-            ],
-            "default": "3.12-bullseye"
-        }
-    },
-    "platforms": [
-        "Python"
-    ]
+	"name": "Alpine",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:alpine-3.18",
+	"features": {
+	}
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
