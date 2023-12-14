@@ -41,8 +41,10 @@ def cal_distances(expansion_factor):
             re = max(sc[0], dc[0])
             cs = min(sc[1], dc[1])
             ce = max(sc[1], dc[1])
+            
+            #This works for part2 but is off-by-one for part1 (need to add +1 to expansion_factor but don't know why)
             row_exp = sum([expansion_factor if i in row_expansion else 1 for i in range(rs, re)])
-            col_exp = sum([expansion_factor if i not in col_has_galaxies else 1 for i in range(cs, ce)])
+            col_exp = sum([1 if i in col_has_galaxies else expansion_factor for i in range(cs, ce)])
             d = row_exp + col_exp
             #print(f"cal {sgid}->{dgid} = {d} (sc={sc} dc={dc} rs={rs} re={re} cs={cs} ce={ce} row_exp={row_exp}, col_exp={col_exp})")
             distances.append(d)
